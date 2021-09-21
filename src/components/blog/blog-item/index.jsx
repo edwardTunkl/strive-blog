@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 export default class BlogItem extends Component {
   render() {
-    const { title, cover, author, _id } = this.props;
+    const { title, cover, author } = this.props;
+    // console.log("BLOGITEMS",this.props)
     return (
-      <Link to={`/blog/${_id}`} className="blog-link">
+      <Link to={`/blog/${this.props.id}`} className="blog-link">
         <Card className="blog-card">
-          <Card.Img variant="top" src={cover} className="blog-cover" />
+          <Card.Img variant="top" src={cover} className="blog-cover cover"/>
           <Card.Body>
             <Card.Title>{title}</Card.Title>
           </Card.Body>
@@ -21,3 +22,4 @@ export default class BlogItem extends Component {
     );
   }
 }
+
