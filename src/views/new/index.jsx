@@ -47,7 +47,7 @@ export default class NewBlogPost extends Component {
         
       const formData = new FormData();
          formData.append("cover", this.state.file);
-          const resp = await fetch(`${this.apiUrl}/blogPosts/${json.id}/cover`, {
+          const resp = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts/${json.id}/cover`, {
             method: "PUT",
             body: formData,
           });
