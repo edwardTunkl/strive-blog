@@ -10,7 +10,7 @@ export default class NewBlogPost extends Component {
     this.handleChange = this.handleChange.bind(this);
     
   }
-  apiUrl = process.env.REACT_APP_BE_URL
+  // apiUrl = process.env.REACT_APP_BE_URL
 
   handleChange(value) {
     this.setState({ text: value });
@@ -18,7 +18,7 @@ export default class NewBlogPost extends Component {
 
   createPost = async () => {
     try {
-      let response = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts`,{
+      let response = await fetch(`${process.env.REACT_APP_BE_URL}/blogPosts`,{
         method: "POST",
         body: JSON.stringify({
           category: this.state.category,
@@ -44,7 +44,7 @@ export default class NewBlogPost extends Component {
       const json = await response.json()
       console.log("New Response ID",json.id)
 
-      const nextResponse = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts/email-response`, {
+      const nextResponse = await fetch(`${process.env.REACT_APP_BE_URL}/blogPosts/email-response`, {
         method: "POST",
         body: JSON.stringify({
           email: this.state.email
@@ -58,7 +58,7 @@ export default class NewBlogPost extends Component {
         
       const formData = new FormData();
          formData.append("cover", this.state.file);
-          const resp = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts/${json.id}/cover`, {
+          const resp = await fetch(`${process.env.REACT_APP_BE_URL}/blogPosts/${json.id}/cover`, {
             method: "PUT",
             body: formData,
           });
