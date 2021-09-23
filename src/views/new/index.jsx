@@ -18,7 +18,7 @@ export default class NewBlogPost extends Component {
 
   createPost = async () => {
     try {
-      let response = await fetch(`${this.apiUrl}/blogPosts`,{
+      let response = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts`,{
         method: "POST",
         body: JSON.stringify({
           category: this.state.category,
