@@ -43,19 +43,7 @@ export default class NewBlogPost extends Component {
       if (response.ok) {    
       const json = await response.json()
       console.log("New Response ID",json.id)
-
-      const nextResponse = await fetch(`${this.apiUrl}/blogPosts/email-response`, {
-        method: "POST",
-        body: JSON.stringify({
-          to: this.state.email
-        })
-      })
-        if(nextResponse.ok){
-          console.log("Incoming email")
-        } else{
-          console.log("No email coming :(")
-        }
-        
+      
       const formData = new FormData();
          formData.append("cover", this.state.file);
           const resp = await fetch(`${this.api}/blogPosts/${json.id}/cover`, {
