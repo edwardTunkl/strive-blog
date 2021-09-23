@@ -30,7 +30,8 @@ export default class NewBlogPost extends Component {
             unit: "minute",
           },
           author: {
-            name: "Edward Tunkl",
+            name: this.state.name,
+            email:this.state.email,
             avatar:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2UugtAXFro4g_Im5O2GibsjF2nzdx5O--qw&usqp=CAU",
           },
@@ -43,7 +44,7 @@ export default class NewBlogPost extends Component {
       if (response.ok) {    
       const json = await response.json()
       console.log("New Response ID",json.id)
-      
+
       const formData = new FormData();
          formData.append("cover", this.state.file);
           const resp = await fetch(`${this.api}/blogPosts/${json.id}/cover`, {
