@@ -6,19 +6,19 @@ import "./styles.css";
 export default class NewBlogPost extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: "", title: "", category: "", file: null };
+    this.state = { name: "", email: "", text: "", title: "", category: "", file: null };
     this.handleChange = this.handleChange.bind(this);
     
   }
+  apiUrl = process.env.REACT_APP_BE_URL
 
   handleChange(value) {
     this.setState({ text: value });
   }
-  // apiUrl = process.env.REACT_APP_BE_URL
 
   createPost = async () => {
     try {
-      let response = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts`,{
+      let response = await fetch(`${this.apiUrl}/blogPosts`,{
         method: "POST",
         body: JSON.stringify({
           category: this.state.category,
@@ -44,10 +44,21 @@ export default class NewBlogPost extends Component {
       const json = await response.json()
       console.log("New Response ID",json.id)
 
+      const nextResponse = await fetch(`${this.apiUrl}/blogPosts/email-response`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: this.state.email
+        })
+      })
+        if(nextResponse.ok){
+          console.log("Incoming email")
+        } else{
+          console.log("No email coming :(")
+        }
         
       const formData = new FormData();
          formData.append("cover", this.state.file);
-          const resp = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts/${json.id}/cover`, {
+          const resp = await fetch(`${this.apiUrl}/blogPosts/${json.id}/cover`, {
             method: "PUT",
             body: formData,
           });
@@ -72,8 +83,20 @@ export default class NewBlogPost extends Component {
       <Container className="new-blog-container">
         <Form className="mt-5" onSubmit={this.sendPost}>
           <Form.Group controlId="blog-form" className="mt-3">
+            <Form.Label>Name</Form.Label>
+            <Form.Control size="lg" placeholder="Name" 
+            onChange={(e) => this.setState({name: e.target.value})}
+             />
+          </Form.Group>
+          <Form.Group controlId="blog-form" className="mt-3">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control size="lg" type="email" placeholder="Email" 
+            onChange={(e) => this.setState({email: e.target.value})}
+             />
+          </Form.Group>
+          <Form.Group controlId="blog-form" className="mt-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control size="lg" placeholder="Title" 
+            <Form.Control size="lg" placeholder="Blog Title" 
             onChange={(e) => this.setState({title: e.target.value})}
              />
           </Form.Group>

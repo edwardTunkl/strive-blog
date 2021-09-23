@@ -6,13 +6,13 @@ export default class BlogList extends Component {
   state = { posts: [] };
   
   componentDidMount(){
-    // const apiURL = process.env.REACT_APP_BE_URL
     this.fetchPosts()
   }
+  apiURL = process.env.REACT_APP_BE_URL
   
   fetchPosts = async () => {
     try {
-      let response = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts`);
+      let response = await fetch(`${this.apiURL}/blogPosts`);
       let recievedPosts = await response.json();
       this.setState({ posts: recievedPosts });
       // console.log("THIS IS RECIEVEDPOST: ",recievedPosts)
