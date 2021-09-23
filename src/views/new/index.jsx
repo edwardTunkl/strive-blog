@@ -44,7 +44,7 @@ export default class NewBlogPost extends Component {
       const json = await response.json()
       console.log("New Response ID",json.id)
 
-      const nextResponse = await fetch(`${this.apiUrl}/blogPosts/email-response`, {
+      const nextResponse = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts/email-response`, {
         method: "POST",
         body: JSON.stringify({
           email: this.state.email
@@ -58,7 +58,7 @@ export default class NewBlogPost extends Component {
         
       const formData = new FormData();
          formData.append("cover", this.state.file);
-          const resp = await fetch(`${this.apiUrl}/blogPosts/${json.id}/cover`, {
+          const resp = await fetch(`https://blogpost-express-app.herokuapp.com/blogPosts/${json.id}/cover`, {
             method: "PUT",
             body: formData,
           });
