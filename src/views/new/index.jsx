@@ -46,9 +46,8 @@ export default class NewBlogPost extends Component {
 
       const nextResponse = await fetch(`${this.apiUrl}/blogPosts/email-response`, {
         method: "POST",
-        body: JSON.stringify({
-          email: this.state.email
-        })
+        body: this.state.email
+       
       })
         if(nextResponse.ok){
           console.log("Incoming email")
