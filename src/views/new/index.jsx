@@ -46,8 +46,9 @@ export default class NewBlogPost extends Component {
 
       const nextResponse = await fetch(`${this.apiUrl}/blogPosts/email-response`, {
         method: "POST",
-        body: this.state.email
-       
+        body: JSON.stringify({
+          to: this.state.email
+        })
       })
         if(nextResponse.ok){
           console.log("Incoming email")
@@ -57,7 +58,7 @@ export default class NewBlogPost extends Component {
         
       const formData = new FormData();
          formData.append("cover", this.state.file);
-          const resp = await fetch(`${this.apiUrl}/blogPosts/${json.id}/cover`, {
+          const resp = await fetch(`${this.api}/blogPosts/${json.id}/cover`, {
             method: "PUT",
             body: formData,
           });
