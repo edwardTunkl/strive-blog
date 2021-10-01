@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/amazon-logo.png";
 import "./styles.css";
 export default class NavBar extends Component {
   render() {
@@ -28,7 +28,7 @@ export default class NavBar extends Component {
             >
               <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
             </svg>
-            Post Article
+            New Product
           </Button>
         </Container>
       </Navbar>

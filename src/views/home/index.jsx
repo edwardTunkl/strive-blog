@@ -7,7 +7,7 @@ export default class Home extends Component {
   render() {
     return (
       <Container fluid="sm">
-        <h1 className="blog-main-title">Welcome to the Strive Blog!</h1>
+        <h1 className="blog-main-title">Welcome to Shopping App!</h1>
         <BlogList />
       </Container>
     );

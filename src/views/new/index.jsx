@@ -6,7 +6,7 @@ import "./styles.css";
 export default class NewBlogPost extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", email: "", text: "", title: "", category: "", file: null };
+    this.state = { name: "", image: "", price:"", category: ""};
     this.handleChange = this.handleChange.bind(this);
     
   }
@@ -22,20 +22,7 @@ export default class NewBlogPost extends Component {
         method: "POST",
         body: JSON.stringify({
           category: this.state.category,
-          title: this.state.title,
-          // removed cover: ".....",
-          //   "https://coursereport-production.imgix.net/uploads/school/logo/1045/original/Strive_-_logosquareblack.png?w=200&h=200&dpr=1&q=75",
-          readTime: {
-            value: 2,
-            unit: "minute",
-          },
-          author: {
-            name: this.state.name,
-            email:this.state.email,
-            avatar:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2UugtAXFro4g_Im5O2GibsjF2nzdx5O--qw&usqp=CAU",
-          },
-          content: this.state.text,
+     
         }),
         headers: {
           "Content-Type": "application/json",
@@ -72,21 +59,21 @@ export default class NewBlogPost extends Component {
       <Container className="new-blog-container">
         <Form className="mt-5" onSubmit={this.sendPost}>
           <Form.Group controlId="blog-form" className="mt-3">
-            <Form.Label>Name</Form.Label>
-            <Form.Control size="lg" placeholder="Name" 
+            <Form.Label>Product Name</Form.Label>
+            <Form.Control size="lg" placeholder="Product Name" 
             onChange={(e) => this.setState({name: e.target.value})}
              />
           </Form.Group>
           <Form.Group controlId="blog-form" className="mt-3">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control size="lg" type="email" placeholder="Email" 
-            onChange={(e) => this.setState({email: e.target.value})}
+            <Form.Label>Image</Form.Label>
+            <Form.Control size="lg" type="text" placeholder="Add Image" 
+            onChange={(e) => this.setState({image: e.target.value})}
              />
           </Form.Group>
           <Form.Group controlId="blog-form" className="mt-3">
-            <Form.Label>Title</Form.Label>
-            <Form.Control size="lg" placeholder="Blog Title" 
-            onChange={(e) => this.setState({title: e.target.value})}
+            <Form.Label>Price</Form.Label>
+            <Form.Control size="lg" placeholder="Price" 
+            onChange={(e) => this.setState({price: e.target.value})}
              />
           </Form.Group>
           <Form.Group controlId="blog-category" className="mt-3">
@@ -94,31 +81,13 @@ export default class NewBlogPost extends Component {
             <Form.Control size="lg" as="select" 
               onChange={(e) => this.setState({category: e.target.value})}
             >
-              <option>Category1</option>
-              <option>Category2</option>
-              <option>Category3</option>
-              <option>Category4</option>
-              <option>Category5</option>
+              <option>Phone</option>
+              <option>Smartphone</option>
+              <option>Tv</option>
+              <option>Pc</option>
+              <option>Gaming</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="blog-content" className="mt-3">
-            <Form.Label>Blog Content</Form.Label>
-            <ReactQuill
-              value={this.state.text}
-              onChange={this.handleChange}
-              className="new-blog-content"
-            />
-          </Form.Group>
-          <Form.Group controlId="blog-content">
-              <Form.Label>Blog Cover</Form.Label>
-              <Form.Control
-                onChange={(e) => { 
-                this.setState({file: e.target.files[0]})
-                }}
-                type="file"
-                placeholder="Cover"
-              />
-            </Form.Group>
           <Form.Group className="d-flex mt-3 justify-content-end">
             <Button type="reset" size="lg" variant="outline-dark">
               Reset
