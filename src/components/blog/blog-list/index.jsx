@@ -13,10 +13,10 @@ export default class BlogList extends Component {
 
   fetchPosts = async () => {
     try {
-      let response = await fetch(`${this.apiUrl}/blogPosts`);
+      let response = await fetch(`http://localhost:3001/products`);
       let recievedPosts = await response.json();
       this.setState({ posts: recievedPosts });
-      // console.log("THIS IS RECIEVEDPOST: ",recievedPosts)
+      console.log("THIS IS RECIEVEDPOST: ",recievedPosts)
       
     } catch (error) {
       console.log(error);
