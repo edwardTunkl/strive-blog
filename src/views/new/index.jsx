@@ -18,32 +18,20 @@ export default class NewBlogPost extends Component {
 
   createPost = async () => {
     try {
-      let response = await fetch(`${this.apiUrl}/blogPosts`,{
+      let response = await fetch(`http://localhost:3001/products`,{
         method: "POST",
         body: JSON.stringify({
           category: this.state.category,
+          name: this.state.name,
+          image: this.state.image,
+          category: this.state.category,
+          price: this.state.price
      
         }),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      if (response.ok) {    
-      const json = await response.json()
-      console.log("New Response ID",json.id)
-
-      const formData = new FormData();
-         formData.append("cover", this.state.file);
-          const resp = await fetch(`${this.apiUrl}/blogPosts/${json.id}/cover`, {
-            method: "PUT",
-            body: formData,
-          });
-          if (resp.ok) {
-           console.log("cover was sent")
-          } else {
-            console.log("not sent")
-          } 
-      }
     } catch(error){
       console.log(error)
     }
